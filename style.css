@@ -1,0 +1,143 @@
+@charset "UTF-8";
+
+/* 共通部分 
+-----------------------*/
+html {
+    font-size: 100%;
+    min-height: 100vh;
+}
+body {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    background: linear-gradient(#5e00ef, #6442f4, #6da0ff);
+    background-repeat: no-repeat;
+}
+h1,
+h2 {
+    text-align: center;
+}
+h1 {
+    color: #fff;
+}
+h2 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #b4b4b4;
+}
+a {
+    text-decoration: none;
+}
+.wrapper {
+    width: 800px;
+    margin: 50px auto;
+}
+.form-area,
+.incomplete-area,
+.complete-area,
+.edit-area {
+    background-color: #fff;
+    margin: 10px 0;
+    border-radius: 5px;
+    padding: 20px 50px;
+}
+.errors {
+    color: #ed2222;
+    background-color: #f0cdcd;
+    list-style: none;
+    border-radius: 5px;
+    margin: 20px 0;
+    padding: 10px 20px;
+}
+
+/* フォーム */
+input[type="text"] ,input[type="date"] {
+    border: 1px solid #b4b4b4;
+    border-radius: 3px;
+    width: 100%;
+    padding: 10px;
+}
+
+/* ボタン */
+.btn {
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+}
+.btn:hover {
+    opacity: .5;
+}
+.submit-btn, .return-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 5px 0;
+    letter-spacing: 1.5rem;
+    text-indent: 1.5rem;
+}
+.submit-btn {
+    background-color: #fd00ed;
+}
+.done-link-area,
+.edit-link-area,
+.delete-link-area {
+    width: 11%;
+}
+.mini-btn {
+    padding: 5px 20px;
+}
+.done-link-area a {
+    background-color: #3400fb;
+}
+/* .done-link-area{
+    background-color: #00ff00;
+} */
+.edit-link-area a {
+    background-color: #ff7800;
+}
+.delete-link-area a {
+    background-color: #ff0000;
+}
+.return-btn {
+    display: block;
+    background-color: #3400fb;
+}
+
+/* タスク一覧画面 
+-----------------------*/
+.plan-list {
+    width: 100%;
+    text-align: left;
+}
+th {
+    /* font-size: 0.9rem; */
+    padding: 5px 0;
+}
+
+/* タスク更新画面 
+-----------------------*/
+.edit-area form {
+    margin-top: 10px;
+}
+
+/* レスポンシブ 
+-----------------------*/
+@media(max-width :800px) {
+    .wrapper {
+        width: 600px;
+        font-size: 0.9rem;
+    }
+    .mini-btn {
+    padding: 5px 10px;
+    }
+}
+@media(max-width :600px) {
+    .wrapper {
+        width: 90%;
+    }
+    .form-area,
+    .incomplete-area,
+    .complete-area,
+    .edit-area {
+    padding: 20px;
+}
+    /* .mini-btn {
+    padding: 5px;
+    } */
+}
