@@ -71,6 +71,26 @@ function createErrMsg($errors)
     return $err_msg;
 }
 
+// function updateCdToDone($id)
+// {
+//     $dbh = connectDb();
+
+//     $sql = <<<EOM
+//     UPDATE
+//         plans
+//     SET
+//         completion_date = date('Y/m/d')
+//     WHERE
+//         id = :id
+//     EOM;
+
+//     $stmt = $dbh->prepare($sql);
+
+//     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+//     $stmt->execute();
+// }
+
 function findPlansByCd($completion_date)
 {
     $dbh = connectDb();
@@ -87,6 +107,25 @@ function findPlansByCd($completion_date)
     $stmt = $dbh->prepare($sql);
 
     $stmt->bindParam(':completion_date', $completion_date, PDO::PARAM_STR);
+
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+function findPlansByNotnullcd($completion_date)
+{
+    $dbh = connectDb();
+
+    $sql = <<<EOM
+    SELECT
+        *
+    FROM
+        plans
+    WHERE
+        completion_date IS NOT NULL
+    EOM;
+
+    $stmt = $dbh->prepare($sql);
 
     $stmt->execute();
 

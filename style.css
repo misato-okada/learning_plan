@@ -76,18 +76,21 @@ input[type="text"] ,input[type="date"] {
 }
 .done-link-area,
 .edit-link-area,
-.delete-link-area {
-    width: 11%;
+.delete-link-area,
+.notyet-link-area {
+    width: 12%;
+    text-align-last: justify; 
 }
 .mini-btn {
-    padding: 5px 20px;
+    padding: 5px 15px;
+    white-space: nowrap;
 }
 .done-link-area a {
     background-color: #3400fb;
 }
-/* .done-link-area{
+.notyet-link-area a {
     background-color: #00ff00;
-} */
+}
 .edit-link-area a {
     background-color: #ff7800;
 }
@@ -105,9 +108,12 @@ input[type="text"] ,input[type="date"] {
     width: 100%;
     text-align: left;
 }
-th {
+td {
     /* font-size: 0.9rem; */
     padding: 5px 0;
+}
+.red {
+    color: #ff0000;
 }
 
 /* タスク更新画面 
@@ -136,7 +142,7 @@ th {
     .complete-area,
     .edit-area {
     padding: 20px;
-}
+    }
     /* .mini-btn {
     padding: 5px;
     } */

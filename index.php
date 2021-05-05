@@ -19,6 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $null_plans = findPlansByCd(PLAN_CD_NULL);
+array_multisort(array_map( "strtotime", array_column( $null_plans, "due_date" ) ), SORT_ASC, $null_plans ) ;
+
+$notnull_plans = findPlansByNotnullcd($completion_date);
+array_multisort(array_map( "strtotime", array_column( $notnull_plans, "completion_date" ) ), SORT_ASC, $notnull_plans ) ;
+
+$class = "";
+if (date('Y-m-d') >= $plan['due_date']) {
+    $class = 'red';
+}
 ?>
 <!DOCTYPE html>
 
@@ -54,21 +63,21 @@ $null_plans = findPlansByCd(PLAN_CD_NULL);
                 <tbody>
                     <?php foreach ($null_plans as $plan): ?>
                         <tr>
-                            <th class="plan-title">
+                            <td class="plan-title">
                                 <?= h($plan['title']) ?>
-                            </th>
-                            <th class="plan-due-date">
+                            </td>
+                            <td class="plan-due-date <?php echo $class; ?>">
                                 <?= h(date('Y/m/d', strtotime($plan['due_date']))) ?>
-                            </th>
-                            <th class="done-link-area">
-                                <a href="" class="btn mini-btn">完了</a>
-                            </th>
-                            <th class="edit-link-area">
+                            </td>
+                            <td class="done-link-area">
+                                <a href="done.php?id=<?= h($plan['id']) ?>" class="btn mini-btn">完了</a>
+                            </td>
+                            <td class="edit-link-area">
                                 <a href="edit.php?id=<?= h($plan['id']) ?>" class="btn mini-btn">編集</a>
-                            </th>
-                            <th class="delete-link-area">
-                                <a href="" class="btn mini-btn">削除</a>
-                            </th>
+                            </td>
+                            <td class="delete-link-area">
+                                <a href="delete.php?id=<?= h($plan['id']) ?>" class="btn mini-btn">削除</a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -88,14 +97,25 @@ $null_plans = findPlansByCd(PLAN_CD_NULL);
                 </thead>
                 <tbody>
 
+                <?php foreach ($notnull_plans as $plan): ?>
                     <tr>
-                        <th class="plan-title"></th>
-                        <th class="plan-completion-date"></th>
-                        <th class="done-link-area"></th>
-                        <th class="edit-link-area"></th>
-                        <th class="delete-link-area"></th>
+                        <td class="plan-title">
+                            <?= h($plan['title']) ?>
+                        </td>
+                        <td class="plan-completion-date">
+                            <?= h(date('Y/m/d', strtotime($plan['completion_date']))) ?>
+                        </td>
+                        <td class="notyet-link-area">
+                            <a href="done.php?id=<?= h($plan['id']) ?>" class="btn mini-btn">未完了</a>
+                        </td>
+                        <td class="edit-link-area">
+                            <a href="edit.php?id=<?= h($plan['id']) ?>" class="btn mini-btn">編集</a>
+                        </td>
+                        <td class="delete-link-area">
+                            <a href="delete.php?id=<?= h($plan['id']) ?>" class="btn mini-btn">削除</a>
+                        </td>
                     </tr>
-
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
