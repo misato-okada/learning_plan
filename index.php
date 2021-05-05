@@ -18,16 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$null_plans = findPlansByCd(PLAN_CD_NULL);
-array_multisort(array_map( "strtotime", array_column( $null_plans, "due_date" ) ), SORT_ASC, $null_plans ) ;
+$notyet_plans = findPlansByCd($completion_date);
 
-$notnull_plans = findPlansByNotnullcd($completion_date);
-array_multisort(array_map( "strtotime", array_column( $notnull_plans, "completion_date" ) ), SORT_ASC, $notnull_plans ) ;
+$done_plans = findPlansByDonecd($completion_date);
 
 $class = "";
-if (date('Y-m-d') >= $plan['due_date']) {
-    $class = 'red';
-}
+// if (date('Y-m-d') >= $plan['due_date']) {
+//     $class = 'red';
+// }
 ?>
 <!DOCTYPE html>
 
@@ -61,12 +59,17 @@ if (date('Y-m-d') >= $plan['due_date']) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($null_plans as $plan): ?>
+                    <?php foreach ($notyet_plans as $plan): ?>
                         <tr>
                             <td class="plan-title">
                                 <?= h($plan['title']) ?>
                             </td>
-                            <td class="plan-due-date <?php echo $class; ?>">
+                            <!-- <td class="plan-due-date errPlanRed($class)"> -->
+                                <?php if (date('Y-m-d') > $plan['due_date']): ?>
+                                    <td class="plan-due-date err-red">
+                                <?php else: ?>
+                                    <td class="plan-due-date">
+                                <?php endif; ?> 
                                 <?= h(date('Y/m/d', strtotime($plan['due_date']))) ?>
                             </td>
                             <td class="done-link-area">
@@ -97,7 +100,7 @@ if (date('Y-m-d') >= $plan['due_date']) {
                 </thead>
                 <tbody>
 
-                <?php foreach ($notnull_plans as $plan): ?>
+                <?php foreach ($done_plans as $plan): ?>
                     <tr>
                         <td class="plan-title">
                             <?= h($plan['title']) ?>

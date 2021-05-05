@@ -101,18 +101,27 @@ function findPlansByCd($completion_date)
     FROM
         plans
     WHERE
-        completion_date IS :completion_date;
+        completion_date IS NULL;
+    ORDER BY
+        due_date ASC
     EOM;
 
     $stmt = $dbh->prepare($sql);
-
-    $stmt->bindParam(':completion_date', $completion_date, PDO::PARAM_STR);
 
     $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-function findPlansByNotnullcd($completion_date)
+
+// function errPlanRed($due_date) {
+//     if (date(Y/m/d) > $plan['due_date'])
+//         return 'err-red';
+//     else
+//         return "";
+//     endif
+// }
+
+function findPlansByDonecd($completion_date)
 {
     $dbh = connectDb();
 
@@ -123,6 +132,8 @@ function findPlansByNotnullcd($completion_date)
         plans
     WHERE
         completion_date IS NOT NULL
+    ORDER BY
+        completion_date DESC
     EOM;
 
     $stmt = $dbh->prepare($sql);
