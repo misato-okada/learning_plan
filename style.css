@@ -109,7 +109,6 @@ input[type="text"] ,input[type="date"] {
     text-align: left;
 }
 td {
-    /* font-size: 0.9rem; */
     padding: 5px 0;
 }
 .err-red {
@@ -135,15 +134,12 @@ td {
 }
 @media(max-width :600px) {
     .wrapper {
-        width: 90%;
+        width: 500px;
     }
     .form-area,
     .incomplete-area,
     .complete-area,
     .edit-area {
-    padding: 20px;
+        padding: 20px;
     }
-    /* .mini-btn {
-    padding: 5px;
-    } */
 }

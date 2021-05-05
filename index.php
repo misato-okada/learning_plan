@@ -18,14 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$notyet_plans = findPlansByCd($completion_date);
+$notyet_plans = findPlansByCd();
 
-$done_plans = findPlansByDonecd($completion_date);
+$done_plans = findPlansByDonecd();
 
-$class = "";
-// if (date('Y-m-d') >= $plan['due_date']) {
-//     $class = 'red';
-// }
 ?>
 <!DOCTYPE html>
 

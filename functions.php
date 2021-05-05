@@ -91,7 +91,7 @@ function createErrMsg($errors)
 //     $stmt->execute();
 // }
 
-function findPlansByCd($completion_date)
+function findPlansByCd()
 {
     $dbh = connectDb();
 
@@ -113,15 +113,7 @@ function findPlansByCd($completion_date)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// function errPlanRed($due_date) {
-//     if (date(Y/m/d) > $plan['due_date'])
-//         return 'err-red';
-//     else
-//         return "";
-//     endif
-// }
-
-function findPlansByDonecd($completion_date)
+function findPlansByDonecd()
 {
     $dbh = connectDb();
 
