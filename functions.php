@@ -90,6 +90,25 @@ function updateCdToDone($id)
 
     $stmt->execute();
 }
+function updateCdToNotyet($id)
+{
+    $dbh = connectDb();
+
+    $sql = <<<EOM
+    UPDATE
+        plans
+    SET
+        completion_date = NULL
+    WHERE
+        id = :id
+    EOM;
+
+    $stmt = $dbh->prepare($sql);
+
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $stmt->execute();
+}
 
 function findPlansByCd()
 {

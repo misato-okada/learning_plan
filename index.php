@@ -104,7 +104,7 @@ $done_plans = findPlansByDonecd();
                             <?= h(date('Y/m/d', strtotime($plan['completion_date']))) ?>
                         </td>
                         <td class="notyet-link-area">
-                            <a href="done.php?id=<?= h($plan['id']) ?>" class="btn mini-btn">未完了</a>
+                            <a href="done_cancel.php?id=<?= h($plan['id']) ?>" class="btn mini-btn">未完了</a>
                         </td>
                         <td class="edit-link-area">
                             <a href="edit.php?id=<?= h($plan['id']) ?>" class="btn mini-btn">編集</a>
