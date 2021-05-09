@@ -110,6 +110,19 @@ function updateCdToNotyet($id)
     $stmt->execute();
 }
 
+function expiredDuedate($notyet_plans)
+{
+    $class = [];
+
+    foreach ($notyet_plans as $plan) {
+        if (date('Y-m-d') >= $plan['due_date']) {
+            $class[] = 'expired';
+        }
+    }
+
+    return $class;
+}
+
 function findPlansByCd()
 {
     $dbh = connectDb();

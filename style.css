@@ -111,7 +111,7 @@ input[type="text"] ,input[type="date"] {
 td {
     padding: 5px 0;
 }
-.err-red {
+.expired {
     color: #ff0000;
 }
 
