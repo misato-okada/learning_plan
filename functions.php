@@ -71,25 +71,25 @@ function createErrMsg($errors)
     return $err_msg;
 }
 
-// function updateCdToDone($id)
-// {
-//     $dbh = connectDb();
+function updateCdToDone($id)
+{
+    $dbh = connectDb();
 
-//     $sql = <<<EOM
-//     UPDATE
-//         plans
-//     SET
-//         completion_date = date('Y/m/d')
-//     WHERE
-//         id = :id
-//     EOM;
+    $sql = <<<EOM
+    UPDATE
+        plans
+    SET
+        completion_date = CURRENT_DATE
+    WHERE
+        id = :id
+    EOM;
 
-//     $stmt = $dbh->prepare($sql);
+    $stmt = $dbh->prepare($sql);
 
-//     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
-//     $stmt->execute();
-// }
+    $stmt->execute();
+}
 
 function findPlansByCd()
 {
