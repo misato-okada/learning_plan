@@ -215,3 +215,21 @@ function updatePlan($id, $title, $due_date)
 
     $stmt->execute();
 }
+
+function deleteTask($id)
+{
+    $dbh = connectDb();
+
+    $sql = <<<EOM
+    DELETE FROM
+        plans
+    WHERE
+        id = :id
+    EOM;
+
+    $stmt = $dbh->prepare($sql);
+
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $stmt->execute();
+}
