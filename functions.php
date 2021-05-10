@@ -71,25 +71,55 @@ function createErrMsg($errors)
     return $err_msg;
 }
 
-// function updateCdToDone($id)
-// {
-//     $dbh = connectDb();
+function updateCdToDone($id)
+{
+    $dbh = connectDb();
 
-//     $sql = <<<EOM
-//     UPDATE
-//         plans
-//     SET
-//         completion_date = date('Y/m/d')
-//     WHERE
-//         id = :id
-//     EOM;
+    $sql = <<<EOM
+    UPDATE
+        plans
+    SET
+        completion_date = CURRENT_DATE
+    WHERE
+        id = :id
+    EOM;
 
-//     $stmt = $dbh->prepare($sql);
+    $stmt = $dbh->prepare($sql);
 
-//     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
-//     $stmt->execute();
-// }
+    $stmt->execute();
+}
+function updateCdToNotyet($id)
+{
+    $dbh = connectDb();
+
+    $sql = <<<EOM
+    UPDATE
+        plans
+    SET
+        completion_date = NULL
+    WHERE
+        id = :id
+    EOM;
+
+    $stmt = $dbh->prepare($sql);
+
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $stmt->execute();
+}
+
+function expiredDuedate($plan)
+{
+    $class = '';
+
+        if (date('Y-m-d') >= $plan['due_date']) {
+            $class = 'expired';
+        }
+
+    return $class;
+}
 
 function findPlansByCd()
 {
@@ -192,6 +222,24 @@ function updatePlan($id, $title, $due_date)
 
     $stmt->bindParam(':title', $title, PDO::PARAM_STR);
     $stmt->bindParam(':due_date', $due_date, PDO::PARAM_STR);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $stmt->execute();
+}
+
+function deleteTask($id)
+{
+    $dbh = connectDb();
+
+    $sql = <<<EOM
+    DELETE FROM
+        plans
+    WHERE
+        id = :id
+    EOM;
+
+    $stmt = $dbh->prepare($sql);
+
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
     $stmt->execute();
