@@ -60,11 +60,7 @@ $done_plans = findPlansByDonecd();
                             <td class="plan-title">
                                 <?= h($plan['title']) ?>
                             </td>
-                            <?php //if (date('Y-m-d') >= $plan['due_date']): ?>
-                                <td class="plan-due-date <?php if ($notyet_plans) echo (expiredDuedate($notyet_plans)); ?>">
-                            <?php //else: ?>
-                                <!-- <td class="plan-due-date"> -->
-                            <?php //endif; ?> 
+                            <td class="plan-due-date <?php if ($plan) echo (expiredDuedate($plan)); ?>">
                                 <?= h(date('Y/m/d', strtotime($plan['due_date']))) ?>
                             </td>
                             <td class="done-link-area">
